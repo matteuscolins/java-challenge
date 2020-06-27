@@ -19,7 +19,7 @@ public class CarrinhoComprasFactory {
      * @return CarrinhoCompras
      */
     public CarrinhoCompras criar(String identificacaoCliente) {
-
+        return null;
     }
 
     /**
@@ -32,7 +32,7 @@ public class CarrinhoComprasFactory {
      * @return BigDecimal
      */
     public BigDecimal getValorTicketMedio() {
-
+        return null;
     }
 
     /**
@@ -44,6 +44,6 @@ public class CarrinhoComprasFactory {
      * e false caso o cliente não possua um carrinho.
      */
     public boolean invalidar(String identificacaoCliente) {
-
+        return true;
     }
 }

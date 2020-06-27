@@ -35,7 +35,7 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(Produto produto) {
-
+        return true;
     }
 
     /**
@@ -48,7 +48,7 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(int posicaoItem) {
-
+        return true;
     }
 
     /**
@@ -58,7 +58,7 @@ public class CarrinhoCompras {
      * @return BigDecimal
      */
     public BigDecimal getValorTotal() {
-
+        return null;
     }
 
     /**
@@ -67,6 +67,6 @@ public class CarrinhoCompras {
      * @return itens
      */
     public Collection<Item> getItens() {
-
+        return null;
     }
 }
