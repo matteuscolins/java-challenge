@@ -19,6 +19,8 @@ public class Produto {
      * @param descricao
      */
     public Produto(Long codigo, String descricao) {
+        this.codigo = codigo;
+        this.descricao = descricao;
     }
 
     /**
@@ -27,6 +29,11 @@ public class Produto {
      * @return Long
      */
     public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     /**
@@ -35,5 +42,10 @@ public class Produto {
      * @return String
      */
     public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
