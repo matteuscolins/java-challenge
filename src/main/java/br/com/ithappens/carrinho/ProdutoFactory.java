@@ -10,12 +10,19 @@ public class ProdutoFactory {
     public static List<Produto> produtos = new ArrayList<>();
 
     public ProdutoFactory() {
+
     }
 
     public static void menu(){
         int op = 0;
         do {
             try {
+                Produto produto1 = new Produto((long) 1, "Café", BigDecimal.valueOf(4));
+                produtos.add(produto1);
+                Produto produto2 = new Produto((long) 2, "Leite", BigDecimal.valueOf(5));
+                produtos.add(produto2);
+                Produto produto3 = new Produto((long) 3, "Arroz", BigDecimal.valueOf(3));
+                produtos.add(produto3);
                 do {
                     System.out.println("- MENU -");
                     System.out.println("1 - Criar");
@@ -41,7 +48,7 @@ public class ProdutoFactory {
                         delete();
                         break;
                     default:
-                        System.exit(0);
+                        App.menu();
                         break;
                 }
             } catch (Exception e){

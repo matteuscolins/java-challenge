@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class CarrinhoCompras {
 
-    Collection<Item> itens;
+    Collection<Item> itens = new ArrayList<>();
     String cpf;
+    BigDecimal valorTotal;
 
     public CarrinhoCompras() {
     }
@@ -37,11 +38,10 @@ public class CarrinhoCompras {
      */
     public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
         try {
-            itens = new ArrayList<>();
             Item item = new Item(produto, valorUnitario, quantidade);
             itens.add(item);
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
@@ -77,7 +77,11 @@ public class CarrinhoCompras {
      * @return BigDecimal
      */
     public BigDecimal getValorTotal() {
-        return null;
+        Double valor = 0.00;
+        for (Item item:itens) {
+            valor = valor + (Double.parseDouble(String.valueOf(item.getProduto().getValor())) * item.getQuantidade());
+        }
+        return new BigDecimal(valor);
     }
 
     /**
