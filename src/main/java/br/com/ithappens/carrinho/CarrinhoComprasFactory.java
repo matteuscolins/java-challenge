@@ -1,5 +1,6 @@
 package br.com.ithappens.carrinho;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,12 +74,13 @@ public class CarrinhoComprasFactory {
                 do {
                     System.out.println("- MENU CARRINHO -");
                     System.out.println("1 - Criar");
-                    System.out.println("2 - Invalidar");
-                    System.out.println("3 - Sair");
+                    System.out.println("2 - Adicionar itens");
+                    System.out.println("3 - Invalidar");
+                    System.out.println("4 - Sair");
                     System.out.print("Escolha uma das opções acima e depois aperte ENTER: ");
                     Scanner scanner = new Scanner(System.in);
                     op = scanner.nextInt();
-                } while (op > 3);
+                } while (op > 4);
                 switch (op){
                     case 1:
                         try {
@@ -122,6 +124,38 @@ public class CarrinhoComprasFactory {
                         break;
                     case 2:
                         try {
+                            if(carrinhoCompras.size() > 0) {
+                                System.out.println("Informe o CPF: ");
+                                Scanner scanner = new Scanner(System.in);
+                                String cpf = scanner.nextLine();
+                                for (CarrinhoCompras carrinho:carrinhoCompras) {
+                                    if(carrinho.cpf.equals(cpf)){
+                                        op = 0;
+                                        do{
+                                            System.out.println("Código do produto: ");
+                                            Scanner scanner1 = new Scanner(System.in);
+                                            long codigo = scanner1.nextLong();
+                                            System.out.println("Quantidade: ");
+                                            Scanner scanner2 = new Scanner(System.in);
+                                            int quantidade = scanner2.nextInt();
+                                            for (Produto produto:ProdutoFactory.produtos) {
+                                                if(produto.getCodigo().equals(codigo)){
+                                                    carrinho.adicionarItem(produto, produto.getValor(), quantidade);
+                                                }
+                                            }
+                                        }while (op > 2);
+                                    }
+                                }
+                            } else {
+                                System.out.println("SEM CARRINHOS CADASTRADOS!");
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        break;
+                    case 3:
+                        try {
                             Scanner scanner = new Scanner(System.in);
                             String cpf = scanner.nextLine();
                             if(cpf != null){
@@ -148,9 +182,6 @@ public class CarrinhoComprasFactory {
                         } catch (Exception e){
                             e.printStackTrace();
                         }
-                        break;
-                    case 3:
-                        //edita();
                         break;
                     case 4:
                         //delete();

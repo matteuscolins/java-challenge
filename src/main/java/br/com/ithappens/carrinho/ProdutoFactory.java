@@ -1,5 +1,6 @@
 package br.com.ithappens.carrinho;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,6 +58,9 @@ public class ProdutoFactory {
             Scanner scanner2 = new Scanner(System.in);
             System.out.print("Informe a descrição do produto: ");
             String descricao = scanner2.nextLine();
+            Scanner scanner3 = new Scanner(System.in);
+            System.out.print("Informe o valor do produto: ");
+            BigDecimal valor = scanner3.nextBigDecimal();
             if(produtos.size() > 0){
                 for (Produto prod:produtos) {
                     if(prod.getCodigo() == codigo){
@@ -77,7 +81,7 @@ public class ProdutoFactory {
                     }
                 }
             }
-            Produto produto = new Produto(codigo, descricao);
+            Produto produto = new Produto(codigo, descricao, valor);
             produtos.add(produto);
             if(produto != null){
                 System.out.println("Produto adicionado com sucesso!");

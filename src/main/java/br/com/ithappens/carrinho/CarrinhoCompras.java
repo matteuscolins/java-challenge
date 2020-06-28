@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CarrinhoCompras {
 
-    List<Item> items;
+    Collection<Item> itens;
     String cpf;
 
     public CarrinhoCompras() {
@@ -37,9 +37,9 @@ public class CarrinhoCompras {
      */
     public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
         try {
-            items = new ArrayList<>();
+            itens = new ArrayList<>();
             Item item = new Item(produto, valorUnitario, quantidade);
-            items.add(item);
+            itens.add(item);
         }catch (Exception e){
 
         }
@@ -86,6 +86,8 @@ public class CarrinhoCompras {
      * @return itens
      */
     public Collection<Item> getItens() {
-        return null;
+        return itens;
     }
+
+
 }
