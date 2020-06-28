@@ -169,12 +169,40 @@ public class CarrinhoComprasFactory {
                                 System.out.println("Informe o CPF: ");
                                 Scanner scanner = new Scanner(System.in);
                                 String cpf = scanner.nextLine();
-                                System.out.println("|COD|QTDE   |DESCRIÇÃO                           |VALOR    ");
-                                System.out.println("|---|-------|------------------------------------|---------");
+                                System.out.println("|POSIÇÃO|COD|QTDE   |DESCRIÇÃO                           |VALOR    ");
+                                System.out.println("|-------|-------|------------------------------------|---------");
                                 for (CarrinhoCompras compras : carrinhoCompras) {
                                     if (compras.cpf.equals(cpf)) {
+                                        int i = 1;
                                         for (Item item : compras.getItens()) {
-                                            System.out.println("|"+item.getProduto().getCodigo() + "\t|" + item.getQuantidade() + "\t\t|" + item.getProduto().getDescricao() + "\t\t|" + item.getProduto().getValor());
+                                            System.out.println("|"+i+"\t|"+item.getProduto().getCodigo() + "\t|" + item.getQuantidade() + "\t\t|" + item.getProduto().getDescricao() + "\t\t|" + item.getProduto().getValor());
+                                            i++;
+                                        }
+                                        int opcao = 0;
+                                        do {
+                                            System.out.println("Deseja remover por: ");
+                                            System.out.println("1 - Posição no carrinho de compra");
+                                            System.out.println("2 - Código do produto");
+                                            Scanner scanner1 = new Scanner(System.in);
+                                            opcao = scanner1.nextInt();
+                                        } while (opcao > 2);
+                                        if(opcao == 1){
+                                            int posicao;
+                                            System.out.println("Qual a posição do produto no carrinho?");
+                                            Scanner scanner1 = new Scanner(System.in);
+                                            posicao = scanner1.nextInt();
+                                            compras.removerItem(posicao);
+                                        } else {
+                                            int codigo;
+                                            System.out.println("Qual a código do produto no carrinho?");
+                                            Scanner scanner1 = new Scanner(System.in);
+                                            codigo = scanner1.nextInt();
+                                            for (Item item:compras.getItens()) {
+                                                if(item.getProduto().getCodigo().equals(codigo)){
+                                                    compras.removerItem(item.getProduto());
+                                                    System.out.println("Produto removido do carrinho!");
+                                                }
+                                            }
                                         }
                                     }
                                 }
