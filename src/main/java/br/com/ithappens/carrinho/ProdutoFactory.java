@@ -1,16 +1,14 @@
 package br.com.ithappens.carrinho;
 
-import javax.rmi.PortableRemoteObject;
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProdutoNegocio {
+public class ProdutoFactory {
 
     public static List<Produto> produtos = new ArrayList<>();
 
-    public ProdutoNegocio() {
+    public ProdutoFactory() {
     }
 
     public static void menu(){

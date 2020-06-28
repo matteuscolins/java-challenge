@@ -3,6 +3,9 @@ package br.com.ithappens.carrinho;
 import java.util.Scanner;
 
 public class App {
+
+    private static CarrinhoComprasFactory factory;
+
     public static void main(String args[]){
         menu();
     }
@@ -24,9 +27,11 @@ public class App {
         }while (op > 3);
         switch (op){
             case 1:
-                ProdutoNegocio.menu();
+                ProdutoFactory.menu();
                 break;
             case 2:
+                factory = new CarrinhoComprasFactory();
+                factory.menu();
                 break;
             default:
                 break;

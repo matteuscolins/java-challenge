@@ -1,11 +1,16 @@
 package br.com.ithappens.carrinho;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Classe responsável pela criação e recuperação dos carrinhos de compras.
  */
 public class CarrinhoComprasFactory {
+
+    List<CarrinhoCompras> carrinhoCompras = new ArrayList<>();
 
 	public CarrinhoComprasFactory() {
 	}
@@ -19,7 +24,8 @@ public class CarrinhoComprasFactory {
      * @return CarrinhoCompras
      */
     public CarrinhoCompras criar(String identificacaoCliente) {
-        return null;
+        CarrinhoCompras carrinhoCompras = new CarrinhoCompras(identificacaoCliente);
+        return carrinhoCompras;
     }
 
     /**
@@ -44,6 +50,118 @@ public class CarrinhoComprasFactory {
      * e false caso o cliente não possua um carrinho.
      */
     public boolean invalidar(String identificacaoCliente) {
+        try {
+            if(carrinhoCompras.size() > 0){
+                for (CarrinhoCompras carrinho:carrinhoCompras) {
+                    if(carrinho.cpf.equals(identificacaoCliente)){
+                        carrinhoCompras.remove(carrinho);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return true;
+    }
+
+    public void menu(){
+        int op = 0;
+        do {
+            try {
+                do {
+                    System.out.println("- MENU CARRINHO -");
+                    System.out.println("1 - Criar");
+                    System.out.println("2 - Invalidar");
+                    System.out.println("3 - Sair");
+                    System.out.print("Escolha uma das opções acima e depois aperte ENTER: ");
+                    Scanner scanner = new Scanner(System.in);
+                    op = scanner.nextInt();
+                } while (op > 3);
+                switch (op){
+                    case 1:
+                        try {
+                            Scanner scanner = new Scanner(System.in);
+                            String cpf = scanner.nextLine();
+                            boolean exists = false;
+                            if(cpf != null){
+                                if(carrinhoCompras.size() >= 0){
+                                    for (CarrinhoCompras carCompras:carrinhoCompras){
+                                        if(carCompras.cpf.equals(cpf)){
+                                            exists = true;
+                                        }
+                                    }
+                                    if(exists == true){
+                                        System.out.println("Já existe um carrinho cadastrado com o mesmo CPF");
+                                    } else {
+                                        CarrinhoCompras carrinho = criar(cpf);
+                                        carrinhoCompras.add(carrinho);
+                                    }
+                                }
+                                for (CarrinhoCompras carrinhoCompras:carrinhoCompras) {
+                                    System.out.println(carrinhoCompras.cpf);
+                                }
+                                int opcao = 0;
+                                do {
+                                    System.out.println("Deseja retornar ao menu de carrinhos?");
+                                    System.out.println("1 - Sim");
+                                    System.out.println("2 - Não");
+                                    Scanner scanner1 = new Scanner(System.in);
+                                    opcao = scanner1.nextInt();
+                                } while (opcao > 2);
+                                if(opcao == 1){
+                                    menu();
+                                } else if (opcao == 2){
+                                    App.menu();
+                                }
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 2:
+                        try {
+                            Scanner scanner = new Scanner(System.in);
+                            String cpf = scanner.nextLine();
+                            if(cpf != null){
+                                boolean invalido = invalidar(cpf);
+                                if(invalido == true){
+                                    System.out.println("Carrinho invalidado!");
+                                } else {
+                                    System.out.println("Erro ao encontrar o carrinho com o código identificador!");
+                                }
+                                int opcao = 0;
+                                do {
+                                    System.out.println("Deseja retornar ao menu de carrinhos?");
+                                    System.out.println("1 - Sim");
+                                    System.out.println("2 - Não");
+                                    Scanner scanner1 = new Scanner(System.in);
+                                    opcao = scanner1.nextInt();
+                                } while (opcao > 2);
+                                if(opcao == 1){
+                                    menu();
+                                } else if (opcao == 2){
+                                    App.menu();
+                                }
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 3:
+                        //edita();
+                        break;
+                    case 4:
+                        //delete();
+                        break;
+                    default:
+                        System.exit(0);
+                        break;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }while (op > 5);
     }
 }

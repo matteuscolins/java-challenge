@@ -2,12 +2,24 @@ package br.com.ithappens.carrinho;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Classe que representa o carrinho de compras de um cliente.
  */
 public class CarrinhoCompras {
+
+    List<Item> items;
+    String cpf;
+
+    public CarrinhoCompras() {
+    }
+
+    public CarrinhoCompras(String cpf) {
+        this.cpf = cpf;
+    }
 
     /**
      * Permite a adição de um novo item no carrinho de compras.
@@ -24,6 +36,13 @@ public class CarrinhoCompras {
      * @param quantidade
      */
     public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
+        try {
+            items = new ArrayList<>();
+            Item item = new Item(produto, valorUnitario, quantidade);
+            items.add(item);
+        }catch (Exception e){
+
+        }
 
     }
 
