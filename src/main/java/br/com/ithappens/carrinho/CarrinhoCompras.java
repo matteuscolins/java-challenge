@@ -54,6 +54,16 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(Produto produto) {
+        try {
+            for (Item item:itens) {
+                if(item.getProduto().equals(produto)){
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -79,7 +89,7 @@ public class CarrinhoCompras {
     public BigDecimal getValorTotal() {
         Double valor = 0.00;
         for (Item item:itens) {
-            valor = valor + (Double.parseDouble(String.valueOf(item.getProduto().getValor())) * item.getQuantidade());
+            valor = valor + (Double.parseDouble(String.valueOf(item.getValorUnitario())) * item.getQuantidade());
         }
         return new BigDecimal(valor);
     }

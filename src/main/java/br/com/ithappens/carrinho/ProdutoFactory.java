@@ -17,11 +17,11 @@ public class ProdutoFactory {
         int op = 0;
         do {
             try {
-                Produto produto1 = new Produto((long) 1, "Café", BigDecimal.valueOf(4));
+                Produto produto1 = new Produto((long) 1, "Café");
                 produtos.add(produto1);
-                Produto produto2 = new Produto((long) 2, "Leite", BigDecimal.valueOf(5));
+                Produto produto2 = new Produto((long) 2, "Leite");
                 produtos.add(produto2);
-                Produto produto3 = new Produto((long) 3, "Arroz", BigDecimal.valueOf(3));
+                Produto produto3 = new Produto((long) 3, "Arroz");
                 produtos.add(produto3);
                 do {
                     System.out.println("- MENU -");
@@ -65,9 +65,6 @@ public class ProdutoFactory {
             Scanner scanner2 = new Scanner(System.in);
             System.out.print("Informe a descrição do produto: ");
             String descricao = scanner2.nextLine();
-            Scanner scanner3 = new Scanner(System.in);
-            System.out.print("Informe o valor do produto: ");
-            BigDecimal valor = scanner3.nextBigDecimal();
             if(produtos.size() > 0){
                 for (Produto prod:produtos) {
                     if(prod.getCodigo() == codigo){
@@ -88,7 +85,7 @@ public class ProdutoFactory {
                     }
                 }
             }
-            Produto produto = new Produto(codigo, descricao, valor);
+            Produto produto = new Produto(codigo, descricao);
             produtos.add(produto);
             if(produto != null){
                 System.out.println("Produto adicionado com sucesso!");

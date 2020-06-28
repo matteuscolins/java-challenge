@@ -1,5 +1,6 @@
 package br.com.ithappens.carrinho;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {

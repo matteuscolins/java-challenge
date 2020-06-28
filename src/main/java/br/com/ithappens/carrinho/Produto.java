@@ -13,7 +13,6 @@ public class Produto {
 
     private Long codigo;
     private String descricao;
-    private BigDecimal valor;
 
     /**
      * Construtor da classe Produto.
@@ -21,10 +20,9 @@ public class Produto {
      * @param codigo
      * @param descricao
      */
-    public Produto(Long codigo, String descricao, BigDecimal valor) {
+    public Produto(Long codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
-        this.valor = valor;
     }
 
     /**
@@ -51,19 +49,5 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    /**
-     * Retorna o valor do produto
-     *
-     * @return BigDecimal
-     */
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
     }
 }

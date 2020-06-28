@@ -134,23 +134,26 @@ public class CarrinhoComprasFactory {
                                     if (carrinho.cpf.equals(cpf)) {
                                         int opcao = 0;
                                         do {
-                                            System.out.println("Código do produto: ");
+                                            System.out.print("Código do produto: ");
                                             Scanner scanner1 = new Scanner(System.in);
                                             long codigo = scanner1.nextLong();
-                                            System.out.println("Quantidade: ");
+                                            System.out.print("Valor unitário do produto: ");
                                             Scanner scanner2 = new Scanner(System.in);
-                                            int quantidade = scanner2.nextInt();
+                                            BigDecimal valorUnitario = scanner2.nextBigDecimal();
+                                            System.out.print("Quantidade: ");
+                                            Scanner scanner3 = new Scanner(System.in);
+                                            int quantidade = scanner3.nextInt();
                                             for (Produto produto : ProdutoFactory.produtos) {
                                                 if (produto.getCodigo().equals(codigo)) {
-                                                    carrinho.adicionarItem(produto, produto.getValor(), quantidade);
+                                                    carrinho.adicionarItem(produto, valorUnitario, quantidade);
                                                     System.out.println("Produto adicionado!");
                                                 }
                                             }
                                             System.out.println("Adicionar mais itens?");
                                             System.out.println("1 - Sim");
                                             System.out.println("2 - Não");
-                                            Scanner scanner3 = new Scanner(System.in);
-                                            opcao = scanner3.nextInt();
+                                            Scanner scanner4 = new Scanner(System.in);
+                                            opcao = scanner4.nextInt();
                                         } while (opcao == 1);
                                         menu();
                                     }
@@ -169,13 +172,13 @@ public class CarrinhoComprasFactory {
                                 System.out.println("Informe o CPF: ");
                                 Scanner scanner = new Scanner(System.in);
                                 String cpf = scanner.nextLine();
-                                System.out.println("|POSIÇÃO|COD|QTDE   |DESCRIÇÃO                           |VALOR    ");
-                                System.out.println("|-------|-------|------------------------------------|---------");
+                                System.out.println("|POS.   |COD    |QTDE   |DESCRIÇÃO                           |VALOR    ");
+                                System.out.println("|-------|-------|-------|------------------------------------|---------");
                                 for (CarrinhoCompras compras : carrinhoCompras) {
                                     if (compras.cpf.equals(cpf)) {
                                         int i = 1;
                                         for (Item item : compras.getItens()) {
-                                            System.out.println("|"+i+"\t|"+item.getProduto().getCodigo() + "\t|" + item.getQuantidade() + "\t\t|" + item.getProduto().getDescricao() + "\t\t|" + item.getProduto().getValor());
+                                            System.out.println("|"+i+"\t\t|"+item.getProduto().getCodigo() + "\t\t|" + item.getQuantidade() + "\t\t|" + item.getProduto().getDescricao() + "\t\t|");
                                             i++;
                                         }
                                         int opcao = 0;
@@ -198,9 +201,13 @@ public class CarrinhoComprasFactory {
                                             Scanner scanner1 = new Scanner(System.in);
                                             codigo = scanner1.nextInt();
                                             for (Item item:compras.getItens()) {
-                                                if(item.getProduto().getCodigo().equals(codigo)){
-                                                    compras.removerItem(item.getProduto());
-                                                    System.out.println("Produto removido do carrinho!");
+                                                if(item.getProduto().getCodigo() == codigo){
+                                                    if(compras.removerItem(item.getProduto()) == true){
+                                                        compras.itens.remove(item);
+                                                        System.out.println("Produto removido do carrinho!");
+                                                    } else {
+                                                        System.out.println("Item não encontrado no carrinho!");
+                                                    }
                                                 }
                                             }
                                         }
