@@ -83,7 +83,7 @@ public class CarrinhoCompras {
             } else {
                 Object[] item = itens.toArray();
                 for(int i = 0; i < item.length; i++){
-                    if(i == (posicaoItem -1)){
+                    if(i == (posicaoItem - 1)){
                         itens.remove(item[i]);
                     }
                 }

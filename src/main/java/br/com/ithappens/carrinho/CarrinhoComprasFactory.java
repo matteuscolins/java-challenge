@@ -2,6 +2,7 @@ package br.com.ithappens.carrinho;
 
 import javax.swing.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -39,7 +40,12 @@ public class CarrinhoComprasFactory {
      * @return BigDecimal
      */
     public BigDecimal getValorTicketMedio() {
-        return null;
+        Double soma = 0.00;
+        for(CarrinhoCompras carrinhoCompras:carrinhoCompras){
+            soma+=Double.parseDouble(String.valueOf(carrinhoCompras.getValorTotal()));
+        }
+        Double ticketMedio = soma/carrinhoCompras.size();
+        return new BigDecimal(ticketMedio).setScale(3, RoundingMode.HALF_EVEN);
     }
 
     /**
@@ -77,8 +83,9 @@ public class CarrinhoComprasFactory {
                     System.out.println("2 - Adicionar itens");
                     System.out.println("3 - Remover itens");
                     System.out.println("4 - Valor total");
-                    System.out.println("5 - Invalidar");
-                    System.out.println("6 - Sair");
+                    System.out.println("5 - Ticket Médio");
+                    System.out.println("6 - Invalidar");
+                    System.out.println("7 - Sair");
                     System.out.print("Escolha uma das opções acima e depois aperte ENTER: ");
                     Scanner scanner = new Scanner(System.in);
                     op = scanner.nextInt();
@@ -164,7 +171,6 @@ public class CarrinhoComprasFactory {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
                         break;
                     case 3:
                         try {
@@ -237,7 +243,11 @@ public class CarrinhoComprasFactory {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        break;
                     case 5:
+                        System.out.println("Ticket Médio: " + getValorTicketMedio());
+                        break;
+                    case 6:
                         try {
                             Scanner scanner = new Scanner(System.in);
                             String cpf = scanner.nextLine();
@@ -266,9 +276,7 @@ public class CarrinhoComprasFactory {
                             e.printStackTrace();
                         }
                         break;
-                    case 6:
-                        //delete();
-                        break;
+
                     default:
                         System.exit(0);
                         break;
