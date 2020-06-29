@@ -77,6 +77,20 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(int posicaoItem) {
+        try {
+            if(itens.size() > posicaoItem){
+                System.out.println("Posição não existe");
+            } else {
+                Object[] item = itens.toArray();
+                for(int i = 0; i < item.length; i++){
+                    if(i == (posicaoItem -1)){
+                        itens.remove(item[i]);
+                    }
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return true;
     }
 
