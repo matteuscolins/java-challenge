@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import br.com.ithappens.carrinho.CarrinhoCompras;
 import br.com.ithappens.carrinho.CarrinhoComprasFactory;

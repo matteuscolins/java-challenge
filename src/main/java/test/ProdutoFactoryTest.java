@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import br.com.ithappens.carrinho.Produto;
 import org.junit.Assert;
