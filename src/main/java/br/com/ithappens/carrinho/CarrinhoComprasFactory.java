@@ -10,6 +10,7 @@ import java.util.Scanner;
 /**
  * Classe responsável pela criação e recuperação dos carrinhos de compras.
  */
+
 public class CarrinhoComprasFactory {
 
     List<CarrinhoCompras> carrinhoCompras = new ArrayList<>();
@@ -26,6 +27,10 @@ public class CarrinhoComprasFactory {
      * @return CarrinhoCompras
      */
     public CarrinhoCompras criar(String identificacaoCliente) {
+        /*
+            COMENTARIO: Não armazena o carrinho criado, logo também não pode recuperar o carrinho caso
+            já tenha sido criado
+         */
         CarrinhoCompras carrinhoCompras = new CarrinhoCompras(identificacaoCliente);
         return carrinhoCompras;
     }
@@ -40,6 +45,18 @@ public class CarrinhoComprasFactory {
      * @return BigDecimal
      */
     public BigDecimal getValorTicketMedio() {
+        /*
+            COMENTARIO:
+                BigDecimal são objetos imutáveis, essa rigidez é benéfica quando trabalha-se com valores
+                monetários. Essa imutabilidade pode dificultar operações tradicionais de soma, porém o uso dos métodos
+                diponibilizados pela classe BigDecimal aliadas ao uso de streams podem facilitar esse processo.
+
+            Ex.:
+            BigDecimal soma = carrinhoCompras.stream()
+                                .map(CarrinhoCompras::getValorTotal)
+                                .reduce(BigDecimal.ZERO, BigDecimal::add);
+         */
+
         Double soma = 0.00;
         for(CarrinhoCompras carrinhoCompras:carrinhoCompras){
             soma+=Double.parseDouble(String.valueOf(carrinhoCompras.getValorTotal()));
@@ -57,6 +74,12 @@ public class CarrinhoComprasFactory {
      * e false caso o cliente não possua um carrinho.
      */
     public boolean invalidar(String identificacaoCliente) {
+        /*
+            COMENTARIO:
+             - Utiliza propriedades do objeto que deveriam ser privadas.
+             - Pode retornar true, mesmo quando não remove um carrinho
+             - try catch desnecessário
+         */
         try {
             if (carrinhoCompras.size() > 0) {
                 for (CarrinhoCompras carrinho : carrinhoCompras) {
@@ -73,6 +96,10 @@ public class CarrinhoComprasFactory {
         return true;
     }
 
+    /*
+        COMENTÁRIO: Como especificado no teste, nenhum tipo de interface gráfica seria necessário.
+        A prova consistia em obedecer às regras de implementação disponíveis nos Javadocs
+     */
     public void menu() {
         int op = 0;
         do {

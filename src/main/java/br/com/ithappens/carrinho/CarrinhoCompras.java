@@ -37,6 +37,9 @@ public class CarrinhoCompras {
      * @param quantidade
      */
     public void adicionarItem(Produto produto, BigDecimal valorUnitario, int quantidade) {
+        /*
+            COMENTARIO: O método não adere aos requerimentos caso já exista um item com o produto a ser inserido
+         */
         try {
             Item item = new Item(produto, valorUnitario, quantidade);
             itens.add(item);
@@ -54,6 +57,9 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(Produto produto) {
+        /*
+            COMENTARIO: Apesar de encontrar o item a ser removido no loop, o método não chega a remover o item em questão
+         */
         try {
             for (Item item:itens) {
                 if(item.getProduto().equals(produto)){
@@ -77,6 +83,11 @@ public class CarrinhoCompras {
      * caso o produto não exista no carrinho.
      */
     public boolean removerItem(int posicaoItem) {
+        /*
+            COMENTARIO:
+             - A lógica de verificação da posição no array está invertida.
+                 - O loop utilizado não realiza a tarefa descrita para o método de remover o item da posição informada.
+         */
         try {
             if(itens.size() > posicaoItem){
                 System.out.println("Posição não existe");
@@ -101,6 +112,9 @@ public class CarrinhoCompras {
      * @return BigDecimal
      */
     public BigDecimal getValorTotal() {
+        /*
+            COMENTARIO: Referencie o comentário na classe CarrinhoComprasFactory, método getValorTicketMedio()
+         */
         Double valor = 0.00;
         for (Item item:itens) {
             valor = valor + (Double.parseDouble(String.valueOf(item.getValorUnitario())) * item.getQuantidade());
@@ -122,6 +136,11 @@ public class CarrinhoCompras {
     }
 
     public void setCpf(String cpf) {
+        /*
+            COMENTARIO: Seria interessante evitar que esse campo seja alterado, garantindo a imutabilidade
+            do carrinho. Com o setter disponível um carrinho pode ter o cpf alterado e entao o carrinho deixa de
+            representar o cliente à quem ele foi aliado inicalmente.
+         */
         this.cpf = cpf;
     }
 }

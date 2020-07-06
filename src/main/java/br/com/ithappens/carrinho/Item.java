@@ -34,6 +34,11 @@ public class Item {
     }
 
     public void setProduto(Produto produto) {
+        /*
+            COMENTARIO: Considerar imutabilidade. Criação de um setter para produto permite que um item troque de produto.
+            Considerando a lógica de um carrinho de compras um Item do carrinho não pode mudar de produto, é possível adicionar
+            um novo item e remover um antigo. Trabalhando com imutabilidade é possível refletir esta regra de negócio no código.
+         */
         this.produto = produto;
     }
 
